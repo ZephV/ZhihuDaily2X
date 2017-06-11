@@ -2,6 +2,7 @@ package com.zeph.zhihudaily2x.bean;
 
 
 import retrofit2.http.GET;
+import retrofit2.http.Path;
 import rx.Observable;
 
 public interface OptionBean {
@@ -28,4 +29,7 @@ public interface OptionBean {
   @GET("/api/4/theme/7")
   Observable<ThemeBean> getInterNetNews();
 
+  // 页面
+  @GET("/api/4/news/{id}")
+  Observable<ArticleDetailBean> getNewsDetail(@Path("id") int id);
 }
