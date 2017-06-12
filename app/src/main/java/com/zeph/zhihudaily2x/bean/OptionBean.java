@@ -29,7 +29,7 @@ public interface OptionBean {
   @GET("/api/4/theme/7")
   Observable<ThemeBean> getInterNetNews();
 
-  // 页面
+  // 详细页面
   @GET("/api/4/news/{id}")
   Observable<ArticleDetailBean> getNewsDetail(@Path("id") int id);
 }

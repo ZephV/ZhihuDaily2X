@@ -3,8 +3,8 @@ package com.zeph.zhihudaily2x;
 
 public interface BasePresenter {
 
-  void subscribe();
+    void subscribe();
 
-  void unsubscribe();
+    void unsubscribe();
 
 }
