@@ -68,7 +68,7 @@ public class HomePresenter implements HomeContract.Presenter {
 
             @Override
             public void onNext(RootBean rootBean) {
-                mView.showArticle();
+                mView.showArticle(rootBean.getStories());
             }
         }));
     }

@@ -13,15 +13,15 @@ import com.bumptech.glide.Glide;
 import com.zeph.zhihudaily2x.R;
 import com.zeph.zhihudaily2x.bean.ArticleBean;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ArticleAdapter extends BaseAdapter {
 
-    private ArrayList<ArticleBean> mList;
+    private List<ArticleBean> mList;
     private Context mContext;
     private LayoutInflater mInflater;
 
-    public ArticleAdapter(ArrayList<ArticleBean> list, Context context) {
+    public ArticleAdapter(List<ArticleBean> list, Context context) {
         mList = list;
         mContext = context;
         mInflater = LayoutInflater.from(context);
@@ -61,7 +61,7 @@ public class ArticleAdapter extends BaseAdapter {
         }
         else{
             image.setVisibility(View.VISIBLE);
-            Glide.with(mContext).load(bean.getImages()).into(image);
+            Glide.with(mContext).load(bean.getImages().get(0)).into(image);
         }
         return convertView;
     }
