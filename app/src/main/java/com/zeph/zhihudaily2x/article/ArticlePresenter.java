@@ -1,11 +1,10 @@
 package com.zeph.zhihudaily2x.article;
 
 
-import android.content.Context;
-
 import com.zeph.zhihudaily2x.bean.ArticleDetailBean;
-import com.zeph.zhihudaily2x.bean.OptionBean;
-import com.zeph.zhihudaily2x.util.HtmlUtil;
+import com.zeph.zhihudaily2x.service.ActionService;
+import com.zeph.zhihudaily2x.service.ServiceFactory;
+import com.zeph.zhihudaily2x.util.HtmlUtils;
 
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
@@ -15,41 +14,36 @@ import rx.subscriptions.CompositeSubscription;
 
 public class ArticlePresenter implements ArticleContract.Presenter {
 
+    private ArticleContract.View mView;
+    private ActionService service;
     private CompositeSubscription subscription;
-    private ArticleContract.View view;
-    private OptionBean bean;
-    private int mId;
 
-    public ArticlePresenter(ArticleContract.View view, Context context) {
-        this.view = view;
-        //此处添加缓存功能
-        subscription=new CompositeSubscription();
+
+
+    public ArticlePresenter(ArticleContract.View view) {
+        mView = view;
+        service = ServiceFactory.createRetrofitService(ActionService.class, ActionService.baseUrl);
+        subscription = new CompositeSubscription();
     }
-
-
 
     @Override
     public void subscribe() {
-        if (mId!=0){
-            loadArticleDetail(mId);
-        }
     }
 
     @Override
     public void unsubscribe() {
-        subscription.clear();
     }
 
     @Override
     public void loadArticleDetail(int id) {
-        mId = id;
-        subscription.add(bean.getNewsDetail(id)
+        int articleId = id;
+        subscription.add(service.getNewsDetails(articleId)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
         .map(new Func1<ArticleDetailBean, String>() {
             @Override
             public String call(ArticleDetailBean articleDetailBean) {
-                return HtmlUtil.structHtml(articleDetailBean);
+                return HtmlUtils.structHtml(articleDetailBean);
             }
         })
         .subscribe(new Subscriber<String>() {
@@ -65,7 +59,7 @@ public class ArticlePresenter implements ArticleContract.Presenter {
 
             @Override
             public void onNext(String s) {
-                view.showArticleDetail(s);
+                mView.showArticleDetail(s);
             }
         }));
     }

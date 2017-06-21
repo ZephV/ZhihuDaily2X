@@ -6,17 +6,13 @@ import com.zeph.zhihudaily2x.BaseView;
 
 public interface ArticleContract {
 
-  interface View extends BaseView<Presenter> {
+    interface Presenter extends BasePresenter {
+        void loadArticleDetail(int id); // 加载文章的详细内容
+    }
 
-    void showArticleDetail(String content);
-
-  }
-
-  interface Presenter extends BasePresenter {
-
-    void loadArticleDetail(int id);
-
-  }
+    interface View extends BaseView<Presenter> {
+        void showArticleDetail(String content); // 显示文章的详细内容
+    }
 
 
 }

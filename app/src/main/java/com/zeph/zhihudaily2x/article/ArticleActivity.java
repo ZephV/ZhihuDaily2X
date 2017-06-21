@@ -1,30 +1,36 @@
 package com.zeph.zhihudaily2x.article;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebView;
 
+import com.zeph.zhihudaily2x.R;
+
+import static android.R.attr.id;
+
 public class ArticleActivity extends AppCompatActivity implements ArticleContract.View{
 
-    private WebView mWebView;
+    private WebView webView;
     private int mId;
-    private ArticleContract.Presenter mPresenter;
+    private ArticleContract.Presenter presenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Bundle bundle = getIntent().getExtras();
-        initParms(bundle);
-    }
-
-    private void initParms(Bundle bundle) {
+        setContentView(R.layout.activity_article);
+        initView();
         Intent intent = getIntent();
-        mId =intent.getIntExtra("id",0);
+        mId = intent.getIntExtra("id",0);
+        presenter = new ArticlePresenter(this);
+        setPresenter(presenter);
+
     }
 
-
-    // 下面是接口方法的重写
+    private void initView() {
+        webView= (WebView) findViewById(R.id.web_view);
+    }
 
     @Override
     public void setPresenter(ArticleContract.Presenter presenter) {
@@ -33,6 +39,6 @@ public class ArticleActivity extends AppCompatActivity implements ArticleContrac
 
     @Override
     public void showArticleDetail(String content) {
-        mWebView.loadDataWithBaseURL("file:///android_asset",content,"text/html","UTF-8",null);
+        webView.loadDataWithBaseURL("file:///android_asset/", content, "text/html", "UTF-8", null);
     }
 }

@@ -5,31 +5,31 @@ import java.util.List;
 
 public class ArticleBean {
 
-  private String title;
-  private int id;
-  private List<String> image;
+    private int id;
+    private String title;
+    private List<String> images;
 
-  public String getTitle() {
-    return title;
-  }
+    public int getId() {
+        return id;
+    }
 
-  public void setTitle(String title) {
-    this.title = title;
-  }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-  public int getId() {
-    return id;
-  }
+    public String getTitle() {
+        return title;
+    }
 
-  public void setId(int id) {
-    this.id = id;
-  }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-  public List<String> getImage() {
-    return image;
-  }
+    public List<String> getImages() {
+        return images;
+    }
 
-  public void setImage(List<String> image) {
-    this.image = image;
-  }
+    public void setImages(List<String> images) {
+        this.images = images;
+    }
 }

@@ -13,28 +13,28 @@ import com.bumptech.glide.Glide;
 import com.zeph.zhihudaily2x.R;
 import com.zeph.zhihudaily2x.bean.ArticleBean;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class ArticleAdapter extends BaseAdapter {
 
-    private LayoutInflater mLayoutInflater;
+    private ArrayList<ArticleBean> mList;
     private Context mContext;
-    private List<ArticleBean> mNewsList;
+    private LayoutInflater mInflater;
 
-    public ArticleAdapter(List<ArticleBean> newsList, Context context) {
-        mNewsList = newsList;
+    public ArticleAdapter(ArrayList<ArticleBean> list, Context context) {
+        mList = list;
         mContext = context;
-        mLayoutInflater = LayoutInflater.from(context);
+        mInflater = LayoutInflater.from(context);
     }
 
     @Override
     public int getCount() {
-        return mNewsList.size();
+        return mList.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return mNewsList.get(position);
+        return mList.get(position);
     }
 
     @Override
@@ -44,33 +44,35 @@ public class ArticleAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ViewHold viewHold;
+        ViewHolder viewHolder = null;
         if (convertView == null) {
-            convertView = mLayoutInflater.inflate(R.layout.news_item, null);
-            viewHold = new ViewHold(convertView);
-            convertView.setTag(viewHold);
+            convertView = mInflater.inflate(R.layout.news_item, null);
+            viewHolder = new ViewHolder(convertView);
+            convertView.setTag(viewHolder);
         }
-        viewHold = (ViewHold) convertView.getTag();
-        ArticleBean news = mNewsList.get(position);
-        ImageView ivNews = viewHold.ivNews;
-        TextView tvNews = viewHold.tvNews;
-        tvNews.setText(news.getTitle());
-        if (news.getImage()==null){
-            ivNews.setVisibility(View.GONE);
-        }else {
-            ivNews.setVisibility(View.VISIBLE);
-            Glide.with(mContext).load(news.getImage()).into(ivNews);
+
+        viewHolder = (ViewHolder) convertView.getTag();
+        TextView title = viewHolder.vh_title;
+        ImageView image = viewHolder.vh_image;
+        ArticleBean bean = mList.get(position);
+        title.setText(bean.getTitle());
+        if (bean.getImages()==null){
+            image.setVisibility(View.GONE);
+        }
+        else{
+            image.setVisibility(View.VISIBLE);
+            Glide.with(mContext).load(bean.getImages()).into(image);
         }
         return convertView;
     }
 
-    private class ViewHold {
-        ImageView ivNews;
-        TextView tvNews;
+    private class ViewHolder {
+        TextView vh_title;
+        ImageView vh_image;
 
-        public ViewHold(View v) {
-            ivNews = (ImageView) v.findViewById(R.id.iv_news_item);
-            tvNews = (TextView) v.findViewById(R.id.title_news_item);
+        public ViewHolder(View v) {
+            vh_title = (TextView) v.findViewById(R.id.title_news_item);
+            vh_image = (ImageView) v.findViewById(R.id.iv_news_item);
         }
     }
 }

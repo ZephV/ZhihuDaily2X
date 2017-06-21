@@ -1,11 +1,9 @@
 package com.zeph.zhihudaily2x.home;
 
 
-import android.content.Context;
-
-import com.orhanobut.logger.Logger;
-import com.zeph.zhihudaily2x.bean.OptionBean;
-import com.zeph.zhihudaily2x.bean.ThemeBean;
+import com.zeph.zhihudaily2x.bean.RootBean;
+import com.zeph.zhihudaily2x.service.ActionService;
+import com.zeph.zhihudaily2x.service.ServiceFactory;
 
 import rx.Observable;
 import rx.Subscriber;
@@ -13,18 +11,19 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
-
 public class HomePresenter implements HomeContract.Presenter {
 
     private HomeContract.View mView;
-    private CompositeSubscription mSubscription;
-    private OptionBean mOptionBean;
-    private String mType;
+    private ActionService service;
+    private CompositeSubscription subscription;
 
-    public HomePresenter(HomeContract.View view, Context context) {
+    public HomePresenter(HomeContract.View view) {
         mView = view;
-        mSubscription = new CompositeSubscription();
+        service = ServiceFactory.createRetrofitService(ActionService.class, ActionService.baseUrl);
+        subscription = new CompositeSubscription();
     }
+
+
 
     @Override
     public void subscribe() {
@@ -38,47 +37,39 @@ public class HomePresenter implements HomeContract.Presenter {
 
     @Override
     public void loadArticle(String type) {
-        mType = type;
-        Observable<ThemeBean> rootBean = null;
-        switch (mType) {
-            case "电影日报":
-                rootBean = mOptionBean.getMovieNews();
-                break;
-            case "设计日报":
-                rootBean = mOptionBean.getDesignNews();
-                break;
-            case "动漫日报":
-                rootBean = mOptionBean.getAnimeNews();
-                break;
-            case "游戏日报":
-                rootBean = mOptionBean.getGameNews();
-                break;
-            case "互联网日报":
-                rootBean = mOptionBean.getInterNetNews();
-                break;
-            default:
-                break;
+        String mType = type;
+        Observable<RootBean> rootBeanObservable = null;
+        if (mType.equals("今日头条")) {
+            rootBeanObservable = service.getLatestNews();
+        }
+        if (mType.equals("互联网安全")) {
+            rootBeanObservable = service.getInterest();
+        }
+        if (mType.equals("不准无聊")) {
+            rootBeanObservable = service.getInterest();
+        }
+        if (mType.equals("体育日报")) {
+            rootBeanObservable = service.getInterest();
         }
 
-        mSubscription.add(rootBean
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<ThemeBean>() {
-                    @Override
-                    public void onCompleted() {
+        subscription.add(rootBeanObservable
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(new Subscriber<RootBean>() {
+            @Override
+            public void onCompleted() {
 
-                    }
+            }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        Logger.d(e.toString());
-                    }
+            @Override
+            public void onError(Throwable e) {
 
-                    @Override
-                    public void onNext(ThemeBean themeBean) {
-                        mView.showArticle(themeBean.getNewsList());
-                    }
-                })
-        );
+            }
+
+            @Override
+            public void onNext(RootBean rootBean) {
+                mView.showArticle();
+            }
+        }));
     }
 }

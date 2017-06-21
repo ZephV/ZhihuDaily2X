@@ -5,10 +5,10 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   android:orientation="vertical"
-  tools:context="com.zeph.zhihudaily2x.home.MainActivity">
+  tools:context=".adapter.home.MainActivity">
 
-  <TableLayout
-    android:id="@+id/table_layout"
+  <android.support.design.widget.TabLayout
+    android:id="@+id/tab_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" />
 

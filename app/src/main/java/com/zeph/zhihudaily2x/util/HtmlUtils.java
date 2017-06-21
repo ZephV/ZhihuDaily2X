@@ -1,9 +1,8 @@
 package com.zeph.zhihudaily2x.util;
 
-
 import com.zeph.zhihudaily2x.bean.ArticleDetailBean;
 
-public class HtmlUtil {
+public class HtmlUtils {
     public static String structHtml(ArticleDetailBean storyDetailsEntity) {
         StringBuilder sb = new StringBuilder();
         sb.append("<div class=\"img-wrap\">")
