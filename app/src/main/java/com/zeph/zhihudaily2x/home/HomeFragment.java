@@ -40,7 +40,7 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         super.onViewCreated(view, savedInstanceState);
         this.view = view;
         initView(); // 初始化各控件
-        preseter = new HomePresenter(this);
+        preseter = new HomePresenter(this, getActivity());
         setPresenter(preseter);
 
 
@@ -64,13 +64,13 @@ public class HomeFragment extends Fragment implements HomeContract.View {
 
     @Override
     public void showArticle(final List<ArticleBean> articleBeanList) {
-        mAadapter = new ArticleAdapter(articleBeanList,getContext());
+        mAadapter = new ArticleAdapter(articleBeanList, getContext());
         mListView.setAdapter(mAadapter);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(getActivity(), ArticleActivity.class);
-                intent = intent.putExtra("id",articleBeanList.get(position).getId());
+                intent = intent.putExtra("id", articleBeanList.get(position).getId());
                 startActivity(intent);
             }
         });

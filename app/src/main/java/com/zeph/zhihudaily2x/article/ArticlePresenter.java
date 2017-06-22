@@ -1,6 +1,8 @@
 package com.zeph.zhihudaily2x.article;
 
 
+import android.content.Context;
+
 import com.zeph.zhihudaily2x.bean.ArticleDetailBean;
 import com.zeph.zhihudaily2x.service.ActionService;
 import com.zeph.zhihudaily2x.service.ServiceFactory;
@@ -20,9 +22,9 @@ public class ArticlePresenter implements ArticleContract.Presenter {
 
 
 
-    public ArticlePresenter(ArticleContract.View view) {
+    public ArticlePresenter(ArticleContract.View view, Context context) {
         mView = view;
-        service = ServiceFactory.createRetrofitService(ActionService.class, ActionService.baseUrl);
+        service = ServiceFactory.createRetrofitService(ActionService.class, ActionService.baseUrl,context);
         subscription = new CompositeSubscription();
     }
 

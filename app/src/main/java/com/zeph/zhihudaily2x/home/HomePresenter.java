@@ -1,6 +1,8 @@
 package com.zeph.zhihudaily2x.home;
 
 
+import android.content.Context;
+
 import com.zeph.zhihudaily2x.bean.RootBean;
 import com.zeph.zhihudaily2x.service.ActionService;
 import com.zeph.zhihudaily2x.service.ServiceFactory;
@@ -17,9 +19,9 @@ public class HomePresenter implements HomeContract.Presenter {
     private ActionService service;
     private CompositeSubscription subscription;
 
-    public HomePresenter(HomeContract.View view) {
+    public HomePresenter(HomeContract.View view,Context context) {
         mView = view;
-        service = ServiceFactory.createRetrofitService(ActionService.class, ActionService.baseUrl);
+        service = ServiceFactory.createRetrofitService(ActionService.class, ActionService.baseUrl,context);
         subscription = new CompositeSubscription();
     }
 
