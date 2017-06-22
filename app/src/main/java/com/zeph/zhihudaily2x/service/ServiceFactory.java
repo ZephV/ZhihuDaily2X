@@ -56,6 +56,8 @@ public class ServiceFactory {
                 return response;
             }
         };
+        builder.cache(cache).addInterceptor(internalCache);
+        OkHttpClient client=builder.build();
 
 
 
@@ -63,6 +65,7 @@ public class ServiceFactory {
                 .baseUrl(baseUrl)
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .client(client)
                 .build();
         T service = retrofit.create(tClass);
         return service;
