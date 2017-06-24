@@ -3,7 +3,9 @@ package com.zeph.zhihudaily2x.article;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.webkit.WebView;
 
 import com.zeph.zhihudaily2x.R;
@@ -11,6 +13,7 @@ import com.zeph.zhihudaily2x.R;
 public class ArticleActivity extends AppCompatActivity implements ArticleContract.View {
 
     private WebView webView;
+    private FloatingActionButton fab;
     private int mId;
     private ArticleContract.Presenter presenter;
 
@@ -19,6 +22,7 @@ public class ArticleActivity extends AppCompatActivity implements ArticleContrac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
         initView();
+        fabSetOnClick();
 //        //左上角出现小箭头
 //        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
@@ -28,8 +32,18 @@ public class ArticleActivity extends AppCompatActivity implements ArticleContrac
 
     }
 
+    private void fabSetOnClick() {
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
     private void initView() {
         webView = (WebView) findViewById(R.id.web_view);
+        fab = (FloatingActionButton) findViewById(R.id.fab_article);
     }
 
     @Override

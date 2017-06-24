@@ -15,7 +15,6 @@ import com.zeph.zhihudaily2x.R;
 import com.zeph.zhihudaily2x.adapter.ArticleAdapter;
 import com.zeph.zhihudaily2x.article.ArticleActivity;
 import com.zeph.zhihudaily2x.bean.ArticleBean;
-import com.zeph.zhihudaily2x.service.ActionService;
 
 import java.util.List;
 
@@ -26,7 +25,6 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     private View view;
     private ArticleAdapter mAadapter;
     private HomeContract.Presenter preseter;
-    private ActionService service;
 
     @Nullable
     @Override

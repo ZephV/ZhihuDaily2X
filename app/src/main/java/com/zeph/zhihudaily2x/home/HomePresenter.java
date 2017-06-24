@@ -45,13 +45,13 @@ public class HomePresenter implements HomeContract.Presenter {
             rootBeanObservable = service.getLatestNews();
         }
         if (mType.equals("互联网安全")) {
-            rootBeanObservable = service.getInterest();
+            rootBeanObservable = service.getSafety();
         }
         if (mType.equals("不准无聊")) {
             rootBeanObservable = service.getInterest();
         }
         if (mType.equals("体育日报")) {
-            rootBeanObservable = service.getInterest();
+            rootBeanObservable = service.getSport();
         }
 
         subscription.add(rootBeanObservable
