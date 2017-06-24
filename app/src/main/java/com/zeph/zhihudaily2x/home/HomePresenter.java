@@ -19,12 +19,11 @@ public class HomePresenter implements HomeContract.Presenter {
     private ActionService service;
     private CompositeSubscription subscription;
 
-    public HomePresenter(HomeContract.View view,Context context) {
+    public HomePresenter(HomeContract.View view, Context context) {
         mView = view;
-        service = ServiceFactory.createRetrofitService(ActionService.class, ActionService.baseUrl,context);
+        service = ServiceFactory.createRetrofitService(ActionService.class, ActionService.baseUrl, context);
         subscription = new CompositeSubscription();
     }
-
 
 
     @Override
@@ -55,23 +54,23 @@ public class HomePresenter implements HomeContract.Presenter {
         }
 
         subscription.add(rootBeanObservable
-        .subscribeOn(Schedulers.io())
-        .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(new Subscriber<RootBean>() {
-            @Override
-            public void onCompleted() {
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<RootBean>() {
+                    @Override
+                    public void onCompleted() {
 
-            }
+                    }
 
-            @Override
-            public void onError(Throwable e) {
+                    @Override
+                    public void onError(Throwable e) {
 
-            }
+                    }
 
-            @Override
-            public void onNext(RootBean rootBean) {
-                mView.showArticle(rootBean.getStories());
-            }
-        }));
+                    @Override
+                    public void onNext(RootBean rootBean) {
+                        mView.showArticle(rootBean.getStories());
+                    }
+                }));
     }
 }

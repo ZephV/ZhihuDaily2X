@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import com.zeph.zhihudaily2x.R;
 
@@ -14,6 +16,7 @@ import java.util.List;
 
 public class HomeActivity extends AppCompatActivity {
 
+    private LinearLayout linearLayout;
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private List<HomeFragment> fragmentList = new ArrayList<HomeFragment>();
@@ -41,12 +44,14 @@ public class HomeActivity extends AppCompatActivity {
             public CharSequence getPageTitle(int position) {
                 return titleList.get(position);
             }
-        }) ;
+        });
         tabLayout.setupWithViewPager(viewPager);
+        linearLayout.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
 
     }
 
     private void initView() {
+        linearLayout = (LinearLayout) findViewById(R.id.ll_main);
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         viewPager = (ViewPager) findViewById(R.id.view_pager);
     }

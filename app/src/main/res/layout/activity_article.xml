@@ -10,11 +10,7 @@
         android:id="@+id/web_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center">
-
-
-    </WebView>
-
+        android:layout_gravity="center"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab_article"

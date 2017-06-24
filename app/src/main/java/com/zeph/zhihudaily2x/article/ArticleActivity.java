@@ -29,6 +29,7 @@ public class ArticleActivity extends AppCompatActivity implements ArticleContrac
         mId = intent.getIntExtra("id", 0);
         presenter = new ArticlePresenter(this, this);
         setPresenter(presenter);
+        webView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_FULLSCREEN);
 
     }
 
