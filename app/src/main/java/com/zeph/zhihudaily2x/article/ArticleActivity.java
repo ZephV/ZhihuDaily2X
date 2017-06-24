@@ -4,7 +4,6 @@ package com.zeph.zhihudaily2x.article;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.webkit.WebView;
 
 import com.zeph.zhihudaily2x.R;
@@ -20,8 +19,8 @@ public class ArticleActivity extends AppCompatActivity implements ArticleContrac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_article);
         initView();
-        //左上角出现小箭头
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//        //左上角出现小箭头
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
         mId = intent.getIntExtra("id", 0);
         presenter = new ArticlePresenter(this, this);
@@ -43,14 +42,14 @@ public class ArticleActivity extends AppCompatActivity implements ArticleContrac
         webView.loadDataWithBaseURL("file:///android_asset/", content, "text/html", "UTF-8", null);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        //点击小箭头返回
-        if(item.getItemId() == android.R.id.home)
-        {
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        //点击小箭头返回
+//        if(item.getItemId() == android.R.id.home)
+//        {
+//            finish();
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 }
