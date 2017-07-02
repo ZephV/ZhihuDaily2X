@@ -16,13 +16,21 @@ public interface ActionService {
     @GET("/api/4/news/latest")
     Observable<RootBean> getLatestNews();
 
-    //互联网安全
+    //热门文章
+    @GET("/api/3/news/hot")
+    Observable<RootBean> getHot();
+
+    //用户推荐
+    @GET("/api/4/theme/12")
+    Observable<RootBean> getUser();
+
+    //电影日报
+    @GET("/api/4/theme/3")
+    Observable<RootBean> getMovie();
+
+    //网络安全
     @GET("/api/4/theme/10")
     Observable<RootBean> getSafety();
-
-    //不准无聊
-    @GET("/api/4/theme/11")
-    Observable<RootBean> getInterest();
 
     //体育日报
     @GET("/api/4/theme/8")

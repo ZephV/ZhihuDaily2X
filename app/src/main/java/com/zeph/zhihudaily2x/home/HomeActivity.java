@@ -58,10 +58,16 @@ public class HomeActivity extends AppCompatActivity {
 
     private void initParms(Bundle bundle) {
         fragmentList.add(HomeFragment.getInstance("今日头条"));
-        fragmentList.add(HomeFragment.getInstance("互联网安全"));
+//        fragmentList.add(HomeFragment.getInstance("热门文章"));
+        fragmentList.add(HomeFragment.getInstance("用户推荐"));
+        fragmentList.add(HomeFragment.getInstance("电影日报"));
+        fragmentList.add(HomeFragment.getInstance("网络安全"));
         fragmentList.add(HomeFragment.getInstance("体育日报"));
         titleList.add("今日头条");
-        titleList.add("互联网安全");
+//        titleList.add("热门文章");
+        titleList.add("用户推荐");
+        titleList.add("电影日报");
+        titleList.add("网络安全");
         titleList.add("体育日报");
     }
 }
